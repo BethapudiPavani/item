@@ -1,0 +1,85 @@
+<html>
+<head>
+	<title>Universities Under Colleges List</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+</head>
+<body>
+	<p class="row">
+		<div class="col-md-12"></div>
+	</p>
+
+	<b class="row">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>{{ university.name }}
+			<figure class="creator">
+				<img src="{{ creator.picture }}">
+				<figcaption>{{ creator.name }}</figcaption>
+			</figure>
+			</h1>
+		</div>
+	</b>
+
+	<s class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+		</div>
+		<div class="col-md-7"></div>
+	</s>
+
+	<div class="row">
+		<div class="col-md-12">
+			{% with messages =get_flashed_messages() %}
+			{% if messages %}
+			<ul>
+				{% for message in messages %}
+				<li><strong>{{ message }}</strong></li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% endwith %}
+		</div>
+	</div>
+			{% if items !=[] %}
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-3">
+					<h2>JNTUK</h2>
+					{% for i in items %}
+					{% if i.place=='Bhimavaram' %}
+					<div class="menu-item">
+						<h3>{{i.name}}</h3>
+						<p>{{i.address}}</p>
+						<p class="founded">{{i.phone}}
+						</p>
+					</div>
+					{% endif %}
+					{% endfor %}
+				</div>
+
+				<div class="col-md-3">
+					<h2>JNTUH</h2>
+					{% for i in items %}
+					{% if i.place=='Hyderabad' %}
+					<div class="menu-item">
+						<h3>{{i.name}}</h3>
+						<p>{{i.address}}</p>
+						<p class="founded">{{i.phone}}
+						</p>
+					</div>
+					{% endif %}
+					{% endfor %}
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			{% endif %}
+			{% endblock %}
+    </div>		
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+</body>
+</html>

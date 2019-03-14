@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>University Item Catalog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+
+<body>
+  <div class="row">
+    <b class="col-md-12">
+      <img src="{{url_for('static',filename='University.png')}}" style="margin:0px; width:1520px; height: 235px;">
+    </b>
+  </div>
+  
+  <div class="col-md-12">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class="active mt-2" style="color: white; font-style:normal;">Home</li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          {% if 'username' not in session %}
+           <li><button type="submit" class="btn btn-default mt-2" style="border-radius: 4px; margin-right: 10px;">
+            <a href="{{url_for('showLogin')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></button>
+          </li>
+          {% else %}
+          <li><button type="submit" class="btn btn-default mt-2" style="border-radius: 4px; margin-right: 10px;">
+            <a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span>logout</a></button>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div>
+    {% with messages=get_flashed_messages() %}
+    {% if messages %}
+
+    <ul>
+      {% for message in messages %}
+      <li><strong>{{message}}</strong></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+
+  <div class="container-fluid x-overflow">
+    <div class="row">
+      <div class="col-sm-12" style="background-color: #E8E8FA;">
+        <div class="row">
+          <h3 class="col-sm-10">University Names</h3>
+            <button type="submit" class="btn btn-default mt-2">
+              <a href="{{url_for('newUniversity')}}"><span class="glyphicon glyphicon-plus" style="font-size:15px;color:green;"></span></a>Add
+            </button>        
+        </div>
+      <br />
+      {% for u in university %}
+        <ul class="list-group"> 
+          <li class="list-group-item" style="background-color: white">
+              <div class="row">
+              <a href="{{url_for('showCollege',university_id=u.id)}}" class="col-sm-10">
+                <h4><font color="black">{{u.name}}</font></h4>
+              </a>
+              {% if 'username' in session %}
+              <div class="col-sm-2 row mt-2">
+                <a href="{{url_for('editUniversity',university_id=u.id)}}" class="col-sm-12">
+                  <span class="glyphicon glyphicon-edit" style="font-size:20px;color:black;"></span>
+                </a>
+
+                <a href="{{url_for('deleteUniversity',university_id=u.id)}}" class="col-sm-12">
+                  <span class="glyphicon glyphicon-trash" style="font-size:20px;color:black;"></span>
+                </a>                                  
+              </div>              
+            </div>
+            {% endif %}  
+          </li>
+        </ul>
+      {% endfor %}
+    </div>
+  </div> 
+</div>
+</div> 
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
